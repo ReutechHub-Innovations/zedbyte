@@ -1,0 +1,54 @@
+.admin-login {
+  max-width: 440px;
+  margin: 80px auto;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  color: #eef2f7;
+}
+
+.admin-login h2 {
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.admin-note {
+  color: #cfd9ff;
+  margin-bottom: 22px;
+  font-size: 0.95rem;
+}
+
+.admin-login form div {
+  margin-bottom: 18px;
+}
+
+.admin-login label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e7ecff;
+  font-weight: 600;
+}
+
+.admin-login input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 14, 24, 0.9);
+  color: #f8fbff;
+}
+
+.admin-login button {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #6a5dfc, #00d3ff);
+  color: #fff;
+  cursor: pointer;
+}
+
+.admin-login button:hover {
+  opacity: 0.95;
+}

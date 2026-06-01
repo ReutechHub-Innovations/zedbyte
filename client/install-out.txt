@@ -1,0 +1,5 @@
+npm info using npm@11.13.0
+npm info using node@v24.16.0
+npm error code EOVERRIDE
+npm error Override for ajv@^8.20.0 conflicts with direct dependency
+npm error A complete log of this run can be found in: C:\Users\Mr Lukhele\AppData\Local\npm-cache\_logs\2026-05-31T22_09_13_234Z-debug-0.log

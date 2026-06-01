@@ -1,0 +1,19 @@
+.service-controls{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 28px}
+.toggle-btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#cfe0ff;padding:8px 14px;border-radius:999px;cursor:pointer}
+.toggle-btn.active{background:linear-gradient(90deg,#6a5dfc,#00d3ff);color:#07102a;border:1px solid transparent}
+
+.service-grid{grid-template-columns:repeat(3,1fr)}
+.service-card{display:flex;flex-direction:column;gap:14px;padding:20px}
+.service-top{display:flex;gap:14px;align-items:center}
+.icon-wrap{width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center}
+.svc-icon{width:36px;height:36px;color:#00d3ff}
+.service-head h3{margin:0;font-size:1.1rem}
+.service-cat{margin:4px 0 0;color:#9fb5d8;font-size:0.85rem}
+.service-body p{color:#cfd9ff}
+.service-actions{display:flex;gap:12px;justify-content:flex-end}
+
+@media (max-width:1000px){.service-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.service-grid{grid-template-columns:1fr}.service-actions{justify-content:space-between}}
+
+/* expanded card subtle effect */
+.service-card.open{transform:translateY(-6px);box-shadow:0 24px 50px rgba(2,8,23,0.6)}

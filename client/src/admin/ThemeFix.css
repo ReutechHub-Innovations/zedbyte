@@ -1,0 +1,15 @@
+:root{}
+
+/* Fix: ensure generic text/button colors stay readable on light mode */
+[data-theme='light'] .dashboard,
+[data-theme='light'] .dashboard h1,
+[data-theme='light'] .dashboard .dashboard-link,
+[data-theme='light'] .dashboard-link{
+  color: var(--text) !important;
+}
+
+[data-theme='light'] .dashboard-link{
+  background: var(--primary) !important;
+  color: #fff !important;
+}
+

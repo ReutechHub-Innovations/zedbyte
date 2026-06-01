@@ -1,0 +1,16 @@
+.whatsapp-fab{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.22);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  z-index: 9999;
+}
+
+.whatsapp-fab:hover{transform: translateY(-4px); box-shadow: 0 10px 26px rgba(37, 211, 102, 0.28);}

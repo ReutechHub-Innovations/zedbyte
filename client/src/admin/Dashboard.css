@@ -1,0 +1,16 @@
+.dashboard {
+  padding: 20px;
+}
+
+.dashboard-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.dashboard-link {
+  padding: 8px 12px;
+  background: #4a90e2;
+  color: #fff;
+  border-radius: 4px;
+}
