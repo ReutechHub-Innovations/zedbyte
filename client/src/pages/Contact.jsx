@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Contact.css';
+import founders from '../data/founders';
+import Spinner from '../components/ui/Spinner';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -14,9 +16,31 @@ const Contact = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add API submission logic here when backend form endpoint is ready.
+        setLoading(true);
+        try {
+            const backend = process.env.REACT_APP_BACKEND_URL || '';
+            // Attempt to POST the contact request if backend is configured
+            if (backend) {
+                await fetch(`${backend}/api/contact`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+            } else {
+                // simple simulated delay so UX shows spinner
+                await new Promise((r) => setTimeout(r, 900));
+            }
+        } catch (err) {
+            // swallow — show toast in future
+            // console.error(err);
+        } finally {
+            setLoading(false);
+            setFormData({ name: '', email: '', subject: '', message: '' });
+        }
     };
 
     return (
@@ -33,7 +57,11 @@ const Contact = () => {
                         </div>
                         <div>
                             <strong>Phone</strong>
-                            <p><a href="tel:0970067982">0970067982</a><br /><a href="tel:0769963307">0769963307</a></p>
+                            <p>
+                                {Array.from(new Map(founders.map((f) => [f.phone, f])).values()).map((f) => (
+                                    <span key={f.phone}><a href={`tel:${f.phone.replace(/[^0-9+]/g, '')}`}>{f.phone}</a> — {f.name}<br/></span>
+                                ))}
+                            </p>
                         </div>
                         <div>
                             <strong>Office</strong>
@@ -59,7 +87,9 @@ const Contact = () => {
                         <label htmlFor="message">Message</label>
                         <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about your project" rows="6" required />
                     </div>
-                    <button type="submit" className="primary-btn">Send request</button>
+                    <button type="submit" className="primary-btn" disabled={loading}>
+                        {loading ? <><Spinner size={18} /> <span style={{marginLeft:8}}>Sending...</span></> : 'Send request'}
+                    </button>
                 </form>
             </div>
         </section>

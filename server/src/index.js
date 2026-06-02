@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const dns = require('dns');
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
@@ -26,6 +27,9 @@ try {
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Enable CORS for the client (set CLIENT_URL in server .env in production)
+const clientUrl = process.env.CLIENT_URL || process.env.CLIENT_ORIGIN || '*';
+app.use(cors({ origin: clientUrl, credentials: true }));
 
 // Cloudinary configuration
 cloudinaryConfig();
