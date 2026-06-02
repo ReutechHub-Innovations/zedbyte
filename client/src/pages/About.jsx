@@ -1,4 +1,5 @@
 import React from 'react';
+import CoFounders from '../components/CoFounders';
 
 const About = () => {
   return (
@@ -40,8 +41,11 @@ const About = () => {
         <h2>Trusted locally</h2>
         <p>Based in Lusaka, we serve businesses across Zambia with fast response, modern implementation and a focus on future-proofing every digital asset.</p>
       </section>
+
+      <CoFounders />
     </section>
   );
 };
 
 export default About;
+

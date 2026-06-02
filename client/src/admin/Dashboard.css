@@ -10,7 +10,12 @@
 
 .dashboard-link {
   padding: 8px 12px;
-  background: #4a90e2;
-  color: #fff;
+  background: rgba(74, 144, 226, 0.95);
+  color: var(--text);
   border-radius: 4px;
 }
+
+[data-theme='dark'] .dashboard-link {
+  color: #fff;
+}
+
