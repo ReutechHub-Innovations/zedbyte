@@ -1,0 +1,81 @@
+.content-manager {
+  padding: 32px;
+  background: var(--surface);
+  border-radius: 16px;
+}
+
+.content-manager h2 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.content-manager form {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.content-manager input,
+.content-manager textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-family: inherit;
+}
+
+.content-manager input:focus,
+.content-manager textarea:focus {
+  outline: none;
+  border-color: #00d3ff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.content-manager button {
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.content-manager button:hover {
+  transform: translateY(-2px);
+}
+
+.content-manager ul {
+  list-style: none;
+  padding: 0;
+}
+
+.content-manager li {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+.content-manager li h3 {
+  margin: 0 0 8px 0;
+  color: var(--text);
+}
+
+.content-manager li p {
+  margin: 0 0 16px 0;
+  color: var(--muted);
+}
+
+.content-manager li button {
+  padding: 8px 14px;
+  margin-right: 8px;
+  font-size: 0.85rem;
+}

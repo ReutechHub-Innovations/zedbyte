@@ -10,6 +10,8 @@ const Dashboard = () => {
             <h1>Admin Dashboard</h1>
             <div className="dashboard-links">
                 <Link to="/z-admin/users" className="dashboard-link">Manage Users</Link>
+                <Link to="/z-admin/services" className="dashboard-link">Manage Services</Link>
+                <Link to="/z-admin/projects" className="dashboard-link">Manage Projects</Link>
                 <Link to="/z-admin/content" className="dashboard-link">Content Manager</Link>
                 <Link to="/z-admin/settings" className="dashboard-link">Settings</Link>
             </div>

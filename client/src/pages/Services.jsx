@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { getServices } from '../services/api';
+import Spinner from '../components/ui/Spinner';
 import './Services.css';
 import './ServicesLayoutFix.css';
 
 
 const ALL = 'All';
 
-const services = [
+const defaultServices = [
   { id: 'cctv', title: 'CCTV Installations', category: 'CCTV', description: 'Professional CCTV system planning, installation and monitoring integrations.', icon: 'camera' },
   { id: 'network', title: 'Networking', category: 'Networking', description: 'LAN/WAN design, switches, Wi-Fi planning and secure network deployments.', icon: 'network' },
   { id: 'printer', title: 'Printer Management', category: 'Printer', description: 'Fleet printer setup, drivers, queueing and managed print services.', icon: 'printer' },
@@ -34,8 +37,30 @@ const iconFor = (name) => {
 };
 
 const Services = () => {
+  const history = useHistory();
+  const [services, setServices] = useState(defaultServices);
   const [filter, setFilter] = useState(ALL);
   const [expanded, setExpanded] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setLoading(true);
+        const data = await getServices();
+        if (data && data.length > 0) {
+          setServices(data);
+        }
+      } catch (error) {
+        console.error('Failed to load services from API:', error);
+        // Use default services on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   const categories = [ALL, ...Array.from(new Set(services.map(s => s.category)))];
 
@@ -64,9 +89,11 @@ const Services = () => {
         ))}
       </div>
 
+      {loading && <Spinner />}
+
       <div className="grid service-grid">
         {visible.map(s => (
-          <article key={s.id} className={`card service-card ${expanded[s.id]? 'open':''}`}>
+          <article key={s._id || s.id} className={`card service-card ${expanded[s._id || s.id]? 'open':''}`}>
             <div className="service-top">
               <div className="icon-wrap">{iconFor(s.icon)}</div>
               <div className="service-head">
@@ -78,8 +105,17 @@ const Services = () => {
               <p>{s.description}</p>
             </div>
             <div className="service-actions">
-              <button className="secondary-btn" onClick={() => toggleCard(s.id)}>{expanded[s.id]? 'Collapse':'More'}</button>
-              <a className="primary-btn" href={process.env.REACT_APP_SITE_URL ? `${process.env.REACT_APP_SITE_URL.replace(/\/$/, '')}/contact` : '/contact'}>Request Service</a>
+              {s._id ? (
+                <>
+                  <button className="secondary-btn" onClick={() => history.push(`/services/${s._id}`)}>View Details</button>
+                  <a className="primary-btn" href={process.env.REACT_APP_SITE_URL ? `${process.env.REACT_APP_SITE_URL.replace(/\/$/, '')}/contact` : '/contact'}>Request Service</a>
+                </>
+              ) : (
+                <>
+                  <button className="secondary-btn" onClick={() => toggleCard(s.id)}>{expanded[s.id]? 'Collapse':'More'}</button>
+                  <a className="primary-btn" href={process.env.REACT_APP_SITE_URL ? `${process.env.REACT_APP_SITE_URL.replace(/\/$/, '')}/contact` : '/contact'}>Request Service</a>
+                </>
+              )}
             </div>
           </article>
         ))}

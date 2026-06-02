@@ -1,0 +1,78 @@
+.users-container {
+  padding: 32px;
+  background: var(--surface);
+  border-radius: 16px;
+}
+
+.users-container h1 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.users-table thead {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border);
+}
+
+.users-table th {
+  padding: 16px;
+  text-align: left;
+  color: var(--muted-strong);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.users-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.users-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.users-table button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 200ms ease;
+}
+
+.users-table button:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+@media (max-width: 768px) {
+  .users-container {
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .users-table {
+    font-size: 0.9rem;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 12px;
+  }
+}

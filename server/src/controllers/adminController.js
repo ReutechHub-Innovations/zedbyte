@@ -55,9 +55,9 @@ const deleteUser = async (req, res) => {
 
 // Optional service/project handlers
 const createService = async (req, res) => {
-    const { title, description } = req.body;
+    const { title, description, image } = req.body;
     try {
-        const newService = new Service({ title, description });
+        const newService = new Service({ title, description, image });
         await newService.save();
         res.status(201).json(newService);
     } catch (error) {
@@ -74,10 +74,50 @@ const getAllServices = async (req, res) => {
     }
 };
 
-const createProject = async (req, res) => {
-    const { title, description, imageUrl } = req.body;
+const getServiceById = async (req, res) => {
     try {
-        const newProject = new Project({ title, description, imageUrl });
+        const service = await Service.findById(req.params.id);
+        if (!service) {
+            return res.status(404).json({ message: 'Service not found' });
+        }
+        res.status(200).json(service);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching service', error });
+    }
+};
+
+const updateService = async (req, res) => {
+    try {
+        const updatedService = await Service.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedService) {
+            return res.status(404).json({ message: 'Service not found' });
+        }
+        res.status(200).json(updatedService);
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating service', error });
+    }
+};
+
+const deleteService = async (req, res) => {
+    try {
+        const deletedService = await Service.findByIdAndDelete(req.params.id);
+        if (!deletedService) {
+            return res.status(404).json({ message: 'Service not found' });
+        }
+        res.status(200).json({ message: 'Service deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting service', error });
+    }
+};
+
+const createProject = async (req, res) => {
+    const { title, description, imageUrl, category, link } = req.body;
+    try {
+        const newProject = new Project({ title, description, imageUrl, category, link });
         await newProject.save();
         res.status(201).json(newProject);
     } catch (error) {
@@ -94,6 +134,46 @@ const getAllProjects = async (req, res) => {
     }
 };
 
+const getProjectById = async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id);
+        if (!project) {
+            return res.status(404).json({ message: 'Project not found' });
+        }
+        res.status(200).json(project);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching project', error });
+    }
+};
+
+const updateProject = async (req, res) => {
+    try {
+        const updatedProject = await Project.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedProject) {
+            return res.status(404).json({ message: 'Project not found' });
+        }
+        res.status(200).json(updatedProject);
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating project', error });
+    }
+};
+
+const deleteProject = async (req, res) => {
+    try {
+        const deletedProject = await Project.findByIdAndDelete(req.params.id);
+        if (!deletedProject) {
+            return res.status(404).json({ message: 'Project not found' });
+        }
+        res.status(200).json({ message: 'Project deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting project', error });
+    }
+};
+
 module.exports = {
     getUsers,
     createUser,
@@ -101,6 +181,12 @@ module.exports = {
     deleteUser,
     createService,
     getAllServices,
+    getServiceById,
+    updateService,
+    deleteService,
     createProject,
     getAllProjects,
+    getProjectById,
+    updateProject,
+    deleteProject,
 };

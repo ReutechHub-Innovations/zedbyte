@@ -6,6 +6,8 @@ const dns = require('dns');
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const contentRoutes = require('./routes/contentRoutes');
+const serviceRoutes = require('./routes/serviceRoutes');
+const projectRoutes = require('./routes/projectRoutes');
 const errorHandler = require('./middleware/errorHandler');
 const cloudinaryConfig = require('./config/cloudinary');
 
@@ -52,6 +54,8 @@ mongoose.connect(mongoUri, {
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/content', contentRoutes);
+app.use('/api/services', serviceRoutes);
+app.use('/api/projects', projectRoutes);
 
 // Optional seeds (one-time) when explicitly requested
 // Usage:

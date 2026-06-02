@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 
 const Header = ({ theme, onToggleTheme }) => {
+    const logoSrc = `${process.env.PUBLIC_URL}/zedbytes_logo.png`;
+
     return (
         <Navbar expand="lg" sticky="top" className="custom-navbar shadow-sm">
             <Container>
-                <Navbar.Brand as={Link} to="/">ZEDBYTES SOLUTIONS</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/">
+                    <img src={logoSrc} alt="Zedbytes logo" className="header-logo" />
+                    ZEDBYTES SOLUTIONS
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="main-navbar" />
                 <Navbar.Collapse id="main-navbar">
                     <Nav className="me-auto">
