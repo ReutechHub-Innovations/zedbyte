@@ -4,18 +4,19 @@ import './Hero.css';
 const Hero = () => {
     const isLanding = typeof window !== 'undefined' && (window.location.pathname === '/' || window.location.pathname === '');
 
-    const cloudinaryFallback = [
-        'https://res.cloudinary.com/dbnsapfgb/image/upload/v1780418234/fronpicks/x3cfmldurzge2k4mibiv.jpg',
-        'https://res.cloudinary.com/dbnsapfgb/image/upload/v1780418243/fronpicks/ls1w484dftz2tqcvum2w.jpg',
-        'https://res.cloudinary.com/dbnsapfgb/image/upload/v1780418278/fronpicks/jfmzj2um7pnhccpgn3gr.jpg'
+    // Local images from public/fronpicks folder
+    const localImages = [
+        '/fronpicks/front1.jpg',
+        '/fronpicks/front2.jpg',
+        '/fronpicks/front3.jpg'
     ];
 
-    // Prefer cloud URLs set via REACT_APP_FRONPICKS (comma-separated), otherwise use the uploaded Cloudinary hero photos.
+    // Prefer cloud URLs set via REACT_APP_FRONPICKS (comma-separated), otherwise use local fronpicks photos.
     const envList = (process.env.REACT_APP_FRONPICKS || '')
         .split(',')
         .map((src) => src.trim())
         .filter(Boolean);
-    const images = envList.length ? envList : cloudinaryFallback;
+    const images = envList.length ? envList : localImages;
 
     const [index, setIndex] = useState(0);
 
