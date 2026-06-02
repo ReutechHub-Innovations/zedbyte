@@ -1,15 +1,23 @@
 import React from 'react';
+import React from 'react';
 import './Footer.css';
+import founders from '../data/founders';
 
 const CONTACT = {
-  phone: '0970067982',
-  altPhone: '0769963307',
   email: 'zedbytesoluttions@gmail.com',
   whatsapp: '0970067982',
   address: 'Lusaka, Zambia',
 };
 
 const Footer = () => {
+  // Build unique phone list from founders data (normalize to local format)
+  const phones = Array.from(new Map(founders.map((f) => {
+    // founders store phone in +260... format; convert to local 0-prefixed
+    const p = f.phone.replace(/[^0-9]/g, '');
+    const local = p.startsWith('260') ? '0' + p.slice(3) : (p.startsWith('0') ? p : p);
+    return [local, local];
+  })).values());
+
   const waNumber = CONTACT.whatsapp.replace(/[^0-9]/g, '');
   const waIntl = `+260${waNumber.replace(/^0+/, '')}`;
   const waMessage = encodeURIComponent('Hi, I found your site and would like more information about your digital services.');
@@ -34,9 +42,9 @@ const Footer = () => {
             <p>
               <strong>Phone</strong>
               <br />
-              <a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a>
-              <br />
-              <a href={`tel:${CONTACT.altPhone}`}>{CONTACT.altPhone}</a>
+              {phones.map((p) => (
+                <span key={p}><a href={`tel:${p}`}>{p}</a><br/></span>
+              ))}
             </p>
             <p>
               <strong>Office</strong>

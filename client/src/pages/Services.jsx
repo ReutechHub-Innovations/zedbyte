@@ -79,7 +79,7 @@ const Services = () => {
             </div>
             <div className="service-actions">
               <button className="secondary-btn" onClick={() => toggleCard(s.id)}>{expanded[s.id]? 'Collapse':'More'}</button>
-              <a className="primary-btn" href="/contact">Request Service</a>
+              <a className="primary-btn" href={process.env.REACT_APP_SITE_URL ? `${process.env.REACT_APP_SITE_URL.replace(/\/$/, '')}/contact` : '/contact'}>Request Service</a>
             </div>
           </article>
         ))}
