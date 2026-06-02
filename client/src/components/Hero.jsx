@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Hero.css';
 
 const Hero = () => {
+    const isLanding = typeof window !== 'undefined' && (window.location.pathname === '/' || window.location.pathname === '');
+
+    const images = [
+        '/fronpicks/front1.jpg',
+        '/fronpicks/front2.jpg',
+        '/fronpicks/front3.jpg',
+        '/fronpicks/front4.jpg',
+        '/fronpicks/front5.jpg',
+        '/fronpicks/front6.jpg',
+        '/fronpicks/front7.jpg',
+        '/fronpicks/front8.jpg'
+    ];
+
+    const [index, setIndex] = useState(0);
+
+    useEffect(() => {
+        if (!isLanding) return;
+        const id = setInterval(() => setIndex(i => (i + 1) % images.length), 1000);
+        return () => clearInterval(id);
+    }, [isLanding, images.length]);
+
     return (
         <section className="hero-section">
             <div className="hero-inner container">
@@ -18,6 +39,18 @@ const Hero = () => {
                     </div>
                 </div>
                 <div className="hero-panel card">
+                    <div className="hero-image-card">
+                        {images.map((src, i) => (
+                            <img
+                                key={src}
+                                src={src}
+                                alt={`hero-${i}`}
+                                className={i === index ? 'visible' : ''}
+                                loading="lazy"
+                            />
+                        ))}
+                    </div>
+
                     <div className="hero-panel-header">
                         <span>Built for ambitious teams</span>
                     </div>

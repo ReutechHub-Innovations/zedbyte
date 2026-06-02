@@ -50,6 +50,32 @@
   min-height: 280px;
 }
 
+.hero-image-card {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.hero-image-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.hero-image-card img.visible {
+  opacity: 1;
+}
+
 .hero-panel-header {
   color: var(--muted-strong);
   text-transform: uppercase;
