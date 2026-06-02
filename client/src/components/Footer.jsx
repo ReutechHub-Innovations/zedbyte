@@ -1,5 +1,4 @@
 import React from 'react';
-import React from 'react';
 import './Footer.css';
 import founders from '../data/founders';
 
