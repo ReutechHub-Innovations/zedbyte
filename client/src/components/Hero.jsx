@@ -4,7 +4,9 @@ import './Hero.css';
 const Hero = () => {
     const isLanding = typeof window !== 'undefined' && (window.location.pathname === '/' || window.location.pathname === '');
 
-    const images = [
+    // Prefer cloud URLs set via REACT_APP_FRONPICKS (comma-separated), fallback to local public assets
+    const envList = (process.env.REACT_APP_FRONPICKS || '').split(',').map(s => s.trim()).filter(Boolean);
+    const images = envList.length ? envList : [
         '/fronpicks/front1.jpg',
         '/fronpicks/front2.jpg',
         '/fronpicks/front3.jpg',
@@ -19,7 +21,7 @@ const Hero = () => {
 
     useEffect(() => {
         if (!isLanding) return;
-        const id = setInterval(() => setIndex(i => (i + 1) % images.length), 1000);
+        const id = setInterval(() => setIndex(i => (i + 1) % images.length), 2000);
         return () => clearInterval(id);
     }, [isLanding, images.length]);
 
